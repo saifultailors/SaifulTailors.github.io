@@ -1,6 +1,15 @@
-SAIFUL TAILORS - FIXED CUSTOMER WEBSITE
-1. Upload all files in this folder to Netlify as a new deploy.
-2. The Supabase URL and anon/public key are already included.
-3. The site reads public.products.
-4. Do not add a service_role key to browser code.
-5. If the page still shows an error, the page will display the exact Supabase error under the loading message.
+SAIFUL TAILORS ADMIN PANEL
+
+1) Supabase -> Authentication -> Users -> Add user.
+   Create your private admin email/password.
+2) Supabase -> Storage -> New bucket -> name: products -> Public ON.
+3) Supabase SQL Editor -> run admin-setup.sql once.
+4) Deploy admin.html, admin.css, admin.js together on Netlify.
+5) Open /admin.html and log in.
+6) Add image + name + price + description -> Publish.
+7) The customer website reads from public.products.
+
+SECURITY:
+- Do not use a service_role key in this website.
+- Only give the admin email/password to yourself.
+- The browser uses the Supabase anon/public key.

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Saiful Tailors | Admin</title>
+<link rel="stylesheet" href="admin.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div class="top"><b>SAIFUL TAILORS</b><span>Admin Panel</span></div>
+
+<main>
+  <section id="loginBox" class="panel">
+    <h1>Admin Login</h1>
+    <p>শুধু আপনার Admin account দিয়ে প্রবেশ করুন।</p>
+    <input id="email" type="email" placeholder="Admin email">
+    <input id="password" type="password" placeholder="Password">
+    <button id="loginBtn">Login</button>
+    <div id="loginMsg" class="msg"></div>
+  </section>
+
+  <section id="adminBox" class="hidden">
+    <div class="bar">
+      <h1>পণ্য ব্যবস্থাপনা</h1>
+      <button id="logoutBtn" class="secondary">Logout</button>
+    </div>
+
+    <section class="panel">
+      <h2 id="formTitle">নতুন পণ্য যোগ করুন</h2>
+      <form id="productForm">
+        <input id="name" required placeholder="পণ্যের নাম">
+        <input id="price" required type="number" min="0" step="1" placeholder="দাম">
+        <textarea id="description" placeholder="ছোট বিবরণ"></textarea>
+        <label class="file">পণ্যের ছবি
+          <input id="image" type="file" accept="image/*">
+        </label>
+        <div id="preview"></div>
+        <div class="actions">
+          <button type="submit" id="saveBtn">Publish</button>
+          <button type="button" id="cancelBtn" class="secondary hidden">Cancel</button>
+        </div>
+        <div id="formMsg" class="msg"></div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>বর্তমান পণ্য</h2>
+      <div id="list">লোড হচ্ছে...</div>
+    </section>
+  </section>
+</main>
+
+<script src="admin.js"></script>
+</body>
+</html>
