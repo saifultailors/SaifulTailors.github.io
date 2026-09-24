@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Saiful Tailors | পণ্যসমূহ</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<header><div class="wrap brand"><div class="mark">ST</div><div><h1>SAIFUL TAILORS</h1><p>মাপ আপনার, নিখুঁত ফিটিং আমাদের।</p></div></div></header>
+<section class="hero"><h2>আমাদের পণ্য</h2><p>এরাবিয়ান পাঞ্জাবি ও জুব্বা</p></section>
+<main class="wrap"><div id="status">পণ্য লোড হচ্ছে...</div><div id="products" class="grid"></div></main>
+<footer><b>Saiful Tailors</b><p>ব্রাহ্মণবাড়িয়া হকার্স মার্কেটের পাশে কাজী ম্যানশন দ্বিতীয় তলা</p><p>📞 0185 345 1111</p></footer>
+<script>
+const SUPABASE_URL = 'https://uybpqqmsihbnxdpyexdv.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5YnBxcW1zaWhibnhkcHlleGR2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxNjU5NzcsImV4cCI6MjEwNTc0MTk3N30.6p9QA_l2rpx8_Ni4ToSyr8hveoSULWKaXjornXE_Cu8';
+const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+async function loadProducts(){
+  const status=document.getElementById('status'), box=document.getElementById('products');
+  try {
+    const {data,error}=await client.from('products').select('id,name,price,description,image_url,created_at').order('created_at',{ascending:false});
+    if(error) throw error;
+    if(!data || data.length===0){status.textContent='এখনো কোনো পণ্য যোগ করা হয়নি।';return;}
+    status.textContent='';
+    for(const p of data){
+      const card=document.createElement('article'); card.className='card';
+      const img=document.createElement('img'); img.src=p.image_url||'https://placehold.co/600x700?text=Saiful+Tailors'; img.alt=p.name||'পণ্য'; img.loading='lazy';
+      const info=document.createElement('div'); info.className='info';
+      const h=document.createElement('h3'); h.textContent=p.name||''; info.appendChild(h);
+      if(p.description){const d=document.createElement('p');d.textContent=p.description;info.appendChild(d);}
+      const price=document.createElement('strong'); price.textContent='৳ '+Number(p.price||0).toLocaleString('bn-BD'); info.appendChild(price);
+      card.append(img,info); box.appendChild(card);
+    }
+  } catch(e) {
+    console.error(e);
+    status.innerHTML='পণ্য লোড হচ্ছে না।<br><small>'+String(e.message||e)+'</small>';
+  }
+}
+loadProducts();
+</script>
+</body></html>
